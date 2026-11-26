@@ -63,7 +63,8 @@
   .btns button:hover{ background:var(--tab) }
   .btns button:active{ transform:translateY(1px) }
   .btns button:focus-visible{ outline:3px solid #4a7cff; outline-offset:-3px }
-  footer{ max-width:640px; margin:18px auto 0; text-align:center; color:var(--muted); font-size:12.5px }
+  footer{ max-width:640px; margin:18px auto 0; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.7 }
+  footer .notice{ display:block; margin-top:6px; font-size:12px; word-break:keep-all }
 
   /* 규칙 창 */
   dialog{
@@ -87,6 +88,7 @@
   .dlg-body li{ display:list-item; padding:1px 0; border:0; border-radius:0 }
   .dlg-body li:hover{ background:none }
   .dlg-body p{ margin:6px 0 }
+  .origin{ margin:14px 0 6px; padding-top:10px; border-top:1.5px dashed #d5cfc2; color:var(--muted); font-size:13.5px }
   .dlg-foot{ display:flex; gap:10px; justify-content:flex-end; padding:12px 18px; border-top:1.5px dashed #d5cfc2 }
   .dlg-foot a, .dlg-foot button{
     font:inherit; font-size:15px; padding:8px 16px; border-radius:12px; border:2px solid var(--line);
@@ -114,7 +116,9 @@
   <p class="sub">클로드와 함께 만든 웹 게임 모음</p>
   <ol id="list"></ol>
 </main>
-<footer>‘바로가기’는 새 창으로 열려요 · 창 크기는 자유롭게 조절할 수 있어요</footer>
+<footer>‘바로가기’는 새 창으로 열려요 · 창 크기는 자유롭게 조절할 수 있어요
+  <span class="notice">이 페이지의 게임은 TV 프로그램과 보드게임을 참고해 개인 학습·취미용으로 만든 팬메이드 작품입니다. 원작의 저작권은 각 권리자에게 있습니다.</span>
+</footer>
 
 <dialog id="rules" aria-labelledby="rules-title">
   <div class="dlg-head">
@@ -134,6 +138,7 @@
    - url  : 게임 주소 (Vercel 주소가 바뀌면 여기만 고치면 됩니다)
    - icon : 아이콘 (각 저장소의 파비콘, 못 불러오면 emoji로 표시)
    - win  : 새 창 기본 크기 [가로, 세로]
+   - origin : 규칙 창 맨 아래에 표시할 원작 (없으면 생략)
    ─────────────────────────────────────────────── */
 /* 아이콘: 각 깃허브 저장소에 들어 있는 파비콘 */
 const ICON = {
@@ -151,7 +156,7 @@ const ICON = {
 };
 const GAMES = [
   {
-    name:"Hit, Stay", desc:"한계숫자에 가장 가깝게! 블러핑 베팅 게임",
+    name:"Hit, Stay", origin:"데블스 플랜 3 「Hit, Stay」", desc:"한계숫자에 가장 가깝게! 블러핑 베팅 게임",
     url:"https://hitstay.vercel.app/", icon:ICON["hitstay"], emoji:"🎲", win:[1200,820],
     rules:`
       <p>주사위로 정한 <b>한계숫자를 넘지 않으면서 가장 가깝게</b> 카드 합을 맞추는 블러핑 베팅 게임이에요. 2~5인, 자리마다 사람/AI 선택.</p>
@@ -174,7 +179,7 @@ const GAMES = [
       </ul>`
   },
   {
-    name:"플래그 메모리", desc:"국기 10개를 외우고 25개 중 5개 찾기",
+    name:"플래그 메모리", origin:"데블스 플랜 3 국기 기억 게임", desc:"국기 10개를 외우고 25개 중 5개 찾기",
     url:"https://flagmemory.vercel.app/", icon:ICON["flagmemory"], emoji:"🚩", win:[1100,820],
     rules:`
       <p>데블스플랜 3의 국기 기억 게임. 국기 10개를 30초 동안 외운 뒤, 25개 국기 중 앞에서 본 국기 5개를 1분 안에 찾아요.</p>
@@ -198,7 +203,7 @@ const GAMES = [
       </ul>`
   },
   {
-    name:"땅따먹기", desc:"돌을 세 번 튕겨 내 땅 넓히기",
+    name:"땅따먹기", origin:"전통 놀이 돌 튕기기 땅따먹기", desc:"돌을 세 번 튕겨 내 땅 넓히기",
     url:"https://flickland.vercel.app/", icon:ICON["hopscotch"], emoji:"🪨", win:[1200,860],
     rules:`
       <p>어린 시절 흙바닥에서 하던 <b>돌 튕기기 땅따먹기</b>. 돌을 세 번 튕겨 내 땅으로 돌아오면, 돌이 지나간 자리만큼 내 땅이 넓어져요. 2~4인, 자리마다 사람/AI.</p>
@@ -223,7 +228,7 @@ const GAMES = [
       <p>한 명만 남으면 그 플레이어가 우승해요.</p>`
   },
   {
-    name:"해저탐험", desc:"산소를 나눠 쓰며 보물 건지기",
+    name:"해저탐험", origin:"보드게임 해저탐험 (Deep Sea Adventure · Oink Games)", desc:"산소를 나눠 쓰며 보물 건지기",
     url:"https://deepseaadventure.vercel.app/", icon:ICON["deepsea"], emoji:"🌊", win:[1200,860],
     rules:`
       <p>보드게임 <b>해저탐험(Deep Sea Adventure)</b>. 모든 잠수부가 잠수함 하나와 <b>산소 25</b>를 함께 써요. 3라운드 동안 확보한 보물 점수 합이 가장 높은 사람이 승리. 2~6인, 사람/AI 선택.</p>
@@ -244,7 +249,7 @@ const GAMES = [
       </ul>`
   },
   {
-    name:"우봉고", desc:"조각으로 판 채우기 · 솔로 타임어택",
+    name:"우봉고", origin:"보드게임 우봉고 (Ubongo · Grzegorz Rejchtman · KOSMOS)", desc:"조각으로 판 채우기 · 솔로 타임어택",
     url:"https://ubongom.vercel.app/", icon:ICON["ubongo"], emoji:"🧩", win:[1100,860],
     rules:`
       <p>보드게임 <b>우봉고(Ubongo)</b>를 혼자 시간 재며 즐겨요.</p>
@@ -267,7 +272,7 @@ const GAMES = [
       </ul>`
   },
   {
-    name:"울타리 치기(Slitherlink)", desc:"슬리더링크 · 하나의 닫힌 고리 만들기",
+    name:"울타리 치기(Slitherlink)", origin:"데블스 플랜 3 「울타리 치기」 · 펜슬 퍼즐 슬리더링크 (니코리)", desc:"슬리더링크 · 하나의 닫힌 고리 만들기",
     url:"https://slitherlinks.vercel.app/", icon:ICON["slitherlink"], emoji:"✏️", win:[1000,880],
     rules:`
       <p>데블스 플랜3의 '울타리 치기', 펜슬 퍼즐 <b>슬리더링크</b>를 혼자 풀어요.</p>
@@ -289,7 +294,7 @@ const GAMES = [
       <p>하 5×5 · 중 7×7 · 상 10×10. 문제는 매번 랜덤이고 답은 항상 하나예요.</p>`
   },
   {
-    name:"오딘 카드 대전", desc:"카드 게임 오딘 · 컴퓨터와 대전",
+    name:"오딘 카드 대전", origin:"카드 게임 오딘 (Odin)", desc:"카드 게임 오딘 · 컴퓨터와 대전",
     url:"https://odin-card.vercel.app/", icon:ICON["odin"], emoji:"🃏", win:[900,900],
     rules:`
       <p>카드 게임 <b>오딘(Odin)</b> 규칙으로 컴퓨터와 대전해요. 2~6인(나 + 컴퓨터).</p>
@@ -309,7 +314,7 @@ const GAMES = [
       </ul>`
   },
   {
-    name:"흑과 백", desc:"더 지니어스 데스매치 1:1 심리전",
+    name:"흑과 백", origin:"더 지니어스 데스매치 「흑과 백」", desc:"더 지니어스 데스매치 1:1 심리전",
     url:"https://bnwduel.vercel.app/", icon:ICON["bnw"], emoji:"⚫", win:[1000,860],
     rules:`
       <p>더 지니어스 데스매치 <b>'흑과 백'</b>. 1:1 심리전이에요. AI 대전(쉬움/보통/어려움) 또는 한 기기로 친구와 대결.</p>
@@ -423,7 +428,7 @@ function showRules(g) {
   current = g;
   document.getElementById("rules-title").textContent = g.name + " 규칙";
   const body = document.getElementById("rules-body");
-  body.innerHTML = g.rules;
+  body.innerHTML = g.rules + (g.origin ? `<p class="origin">원작: ${g.origin}</p>` : "");
   body.scrollTop = 0;
   dlg.showModal();
 }
