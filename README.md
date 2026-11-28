@@ -9,7 +9,6 @@
 
 | 게임 | 주소 | 저장소 |
 | --- | --- | --- |
-| 네모세기 | https://countsqaure.vercel.app | jkh76/count4 |
 | Hit, Stay | https://hitstay.vercel.app | jkh76/hitstay |
 | 플래그 메모리 | https://flagmemory.vercel.app | jkh76/flagmemory |
 | 땅따먹기 | https://flickland.vercel.app | jkh76/hopscotch |
@@ -21,6 +20,7 @@
 | 벌칙 룰렛 | https://funnyroulet.vercel.app | jkh76/funnyroulet |
 | 경마 레이스 | https://horse-race-web.vercel.app | jkh76/horse-race |
 | 블라인드 포커 | https://hiddenpoker.vercel.app | jkh76/hiddenpoker |
+| 네모세기 | https://countsqaure.vercel.app | jkh76/count4 |
 
 ## 게임 추가·수정
 
